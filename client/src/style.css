@@ -2796,3 +2796,8 @@ html {
 .custom-style-2 {
   padding: 12px;
 }
+
+/*
+ * The primary color can be overridden at runtime via the VITE_PRIMARY_COLOR environment variable.
+ * The default is set below as --primary in :root.
+ */
