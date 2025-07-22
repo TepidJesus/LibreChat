@@ -209,3 +209,43 @@ We thank [Locize](https://locize.com) for their translation management tools tha
     <img src="https://github.com/user-attachments/assets/d6b70894-6064-475e-bb65-92a9e23e0077" alt="Locize Logo" height="50">
   </a>
 </p>
+
+## UI Customization
+
+You can customize the appearance of LibreChat using environment variables. These can be set at runtime in your deployment (e.g., ECS, Docker):
+
+### Environment Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `UI_FAVICON_URL` | URL to favicon image | `https://your-domain.com/favicon.ico` |
+| `UI_LOGO_URL` | URL to main logo image | `https://your-domain.com/logo.svg` |
+| `UI_APPLE_ICON_URL` | URL to Apple touch icon | `https://your-domain.com/apple-icon.png` |
+| `UI_PRIMARY_COLOR` | Primary color (CSS color value) | `#3B82F6` |
+| `UI_THEME_COLOR` | Browser theme color | `#1E40AF` |
+
+### Using with S3 or External URLs
+
+You can host your assets on S3, CDN, or any accessible URL:
+
+```bash
+# Example with S3
+UI_FAVICON_URL=https://your-bucket.s3.amazonaws.com/assets/favicon.ico
+UI_LOGO_URL=https://your-bucket.s3.amazonaws.com/assets/logo.svg
+UI_PRIMARY_COLOR=#3B82F6
+UI_THEME_COLOR=#1E40AF
+```
+
+### Docker Example
+
+```bash
+docker run -e UI_LOGO_URL="https://your-domain.com/logo.svg" \
+           -e UI_PRIMARY_COLOR="#3B82F6" \
+           librechat:latest
+```
+
+### ECS Example
+
+Set these in your ECS task definition environment variables section.
+
+**Note:** These are runtime configuration options - no rebuild required when changing them.

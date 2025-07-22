@@ -34,6 +34,13 @@ export default function useAppStartup({
 
   useSpeechSettingsInit(!!user);
 
+  /** Set dynamic UI assets (favicon, theme color, primary color) */
+  useEffect(() => {
+    if (startupConfig && (window as any).setDynamicUIAssets) {
+      (window as any).setDynamicUIAssets(startupConfig);
+    }
+  }, [startupConfig]);
+
   /** Set the app title */
   useEffect(() => {
     const appTitle = startupConfig?.appTitle ?? '';

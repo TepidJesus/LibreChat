@@ -8,13 +8,7 @@ import { ApiErrorBoundaryProvider } from './hooks/ApiErrorBoundaryContext';
 import 'katex/dist/katex.min.css';
 import 'katex/dist/contrib/copy-tex.js';
 
-// Inject primary color from env if set
-const primaryColor = import.meta.env.VITE_PRIMARY_COLOR;
-if (primaryColor) {
-  const style = document.createElement('style');
-  style.innerHTML = `:root { --primary: ${primaryColor}; }`;
-  document.head.appendChild(style);
-}
+// TODO: Call window.setDynamicUIAssets(config) once startup config is available
 
 const container = document.getElementById('root');
 const root = createRoot(container);

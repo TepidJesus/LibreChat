@@ -139,6 +139,23 @@ router.get('/', async function (req, res) {
       payload.customFooter = process.env.CUSTOM_FOOTER;
     }
 
+    // UI Customization options
+    if (process.env.UI_FAVICON_URL) {
+      payload.faviconUrl = process.env.UI_FAVICON_URL;
+    }
+    if (process.env.UI_LOGO_URL) {
+      payload.logoUrl = process.env.UI_LOGO_URL;
+    }
+    if (process.env.UI_APPLE_ICON_URL) {
+      payload.appleIconUrl = process.env.UI_APPLE_ICON_URL;
+    }
+    if (process.env.UI_PRIMARY_COLOR) {
+      payload.primaryColor = process.env.UI_PRIMARY_COLOR;
+    }
+    if (process.env.UI_THEME_COLOR) {
+      payload.themeColor = process.env.UI_THEME_COLOR;
+    }
+
     await cache.set(CacheKeys.STARTUP_CONFIG, payload);
     return res.status(200).send(payload);
   } catch (err) {
