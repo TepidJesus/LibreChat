@@ -53,7 +53,29 @@
         // Set primary color if provided
         if (config.primaryColor) {
           const style = document.createElement('style');
-          style.innerHTML = `:root { --primary: ${config.primaryColor}; }`;
+          // Convert hex to RGB for CSS variables
+          const hexToRgb = (hex) => {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+              r: parseInt(result[1], 16),
+              g: parseInt(result[2], 16),
+              b: parseInt(result[3], 16)
+            } : null;
+          };
+          
+          const rgb = hexToRgb(config.primaryColor);
+          if (rgb) {
+            // Override the main LibreChat colors
+            style.innerHTML = `
+              :root { 
+                --surface-submit: ${config.primaryColor}; 
+                --surface-submit-hover: ${config.primaryColor}dd; 
+                --green-700: ${config.primaryColor}; 
+                --green-800: ${config.primaryColor}dd; 
+                --primary: ${rgb.r / 255 * 100}% ${rgb.g / 255 * 100}% ${rgb.b / 255 * 100}%;
+              }
+            `;
+          }
           document.head.appendChild(style);
         }
       };
